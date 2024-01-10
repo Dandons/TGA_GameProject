@@ -102,4 +102,5 @@ public class Attack : State
         states = States.Attack;
         base.Enter();
     }
+    public override void Update(){}
 }

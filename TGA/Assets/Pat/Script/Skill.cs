@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class Skill : ScriptableObject
 {
-    public enum TargetType{
+    public enum TargetType
+    {
         auto,
         directional,
         self
@@ -17,7 +18,37 @@ public class Skill : ScriptableObject
     public float shootSpeed;
     public float buffDuration;
     public float coolDown;
-    public virtual void Activate(float actionSoeed,float damage,float dmgAmplifier,GameObject target){}
-    public virtual void Activate(float actionSoeed,float damage,float dmgAmplifier){}
-    public virtual void Activate(){}
+    [HideInInspector]
+    public bool avaible
+    {
+        get
+        {
+            if (Time.time >= coolDownTime)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+    }
+    protected float coolDownTime;
+    public void SetCoolDown()
+    {
+        coolDownTime = Time.time + coolDown;
+    }
+    public virtual void Activate(float actionSoeed, float damage, float dmgAmplifier, GameObject target) 
+    { 
+        SetCoolDown();
+    }
+    public virtual void Activate(float actionSoeed, float damage, float dmgAmplifier) 
+    { 
+        SetCoolDown();
+    }
+    public virtual void Activate() 
+    { 
+        SetCoolDown();
+    }
 }
