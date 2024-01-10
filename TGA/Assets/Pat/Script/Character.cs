@@ -19,7 +19,7 @@ public class Character : MonoBehaviour
         anim = this.GetComponent<Animator>();
         audioSource = this.GetComponent<AudioSource>();
     }
-    public virtual void TakeDamge(){}
+    public virtual void TakeDamge() { }
     public virtual void Attack(Skill skill) { }
     public virtual void Block() { }
     public virtual void Move() { }
@@ -32,10 +32,16 @@ public class Character : MonoBehaviour
         audioSource.clip = clip;
         audioSource.Play();
     }
-    public void SetAnim(string name){
+    public void SetAnim(string name)
+    {
         anim.SetTrigger(name);
     }
-    public void SetAnim(string name,bool value){
-        anim.SetBool(name,value);
+    public void SetAnim(string name, bool value)
+    {
+        anim.SetBool(name, value);
+    }
+    public void ResetAnim(string name)
+    {
+        anim.ResetTrigger(name);
     }
 }
