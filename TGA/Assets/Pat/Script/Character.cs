@@ -19,14 +19,23 @@ public class Character : MonoBehaviour
         anim = this.GetComponent<Animator>();
         audioSource = this.GetComponent<AudioSource>();
     }
+    public virtual void TakeDamge(){}
     public virtual void Attack(Skill skill) { }
     public virtual void Block() { }
     public virtual void Move() { }
     public virtual void Die() { }
+
+
     public void PlaySound(string soundName)
     {
         AudioClip clip = Resources.Load<AudioClip>($"Audio/{soundName}");
         audioSource.clip = clip;
         audioSource.Play();
+    }
+    public void SetAnim(string name){
+        anim.SetTrigger(name);
+    }
+    public void SetAnim(string name,bool value){
+        anim.SetBool(name,value);
     }
 }
