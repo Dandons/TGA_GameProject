@@ -11,7 +11,7 @@ public class Enemy : Character
         normal, elite, boss
     }
     public EnemyType type;
-    [HideInInspector]public NavMeshAgent agent;
+    [HideInInspector] public NavMeshAgent agent;
     public float detectionRange;
     public float attackRange;
     public Skill lightAttack;
@@ -50,4 +50,18 @@ public class Enemy : Character
         }
     }
 
+    public override void Attack()
+    {
+        int skillChance = Random.Range(0, 101);
+        if (skillChance <= 60)
+        {
+            if (lightAttack.avaible)
+            {
+                lightAttack.Activate();
+            }
+            else if(heavyAttack.avaible){
+                heavyAttack.Activate()
+            }
+        }
+    }
 }

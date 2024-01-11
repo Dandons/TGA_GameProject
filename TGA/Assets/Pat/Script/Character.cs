@@ -20,7 +20,8 @@ public class Character : MonoBehaviour
         audioSource = this.GetComponent<AudioSource>();
     }
     public virtual void TakeDamge() { }
-    public virtual void Attack(Skill skill) { }
+    public virtual void Attack() { }
+    public virtual void Attack(Skill skill){}
     public virtual void Block() { }
     public virtual void Move() { }
     public virtual void Die() { }
