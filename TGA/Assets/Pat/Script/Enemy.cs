@@ -22,7 +22,7 @@ public class Enemy : Character
     private GameObject player;
     private State currentState;
 
-    private void Awake()
+    private void Start()
     {
         agent = this.GetComponent<NavMeshAgent>();
         originatedPos = this.transform.position;
@@ -33,7 +33,7 @@ public class Enemy : Character
 
     private void Update()
     {
-        currentState.Process();
+        currentState=currentState.Process();
     }
 
     public bool DetectPlayer()
@@ -42,6 +42,7 @@ public class Enemy : Character
         Vector3 enemyPos = this.gameObject.transform.position;
         if ((enemyPos - playerPos).magnitude <= detectionRange)
         {
+            Debug.Log("detect");
             return true;
         }
         else
@@ -59,9 +60,35 @@ public class Enemy : Character
             {
                 lightAttack.Activate();
             }
-            else if(heavyAttack.avaible){
-                heavyAttack.Activate()
+            else if (heavyAttack.avaible)
+            {
+                heavyAttack.Activate();
+            }
+            else
+            {
+                specialAttack.Activate();
             }
         }
+        else if (skillChance <= 90)
+        {
+            if (heavyAttack.avaible)
+            {
+                heavyAttack.Activate();
+            }
+            else if (lightAttack.avaible)
+            {
+                lightAttack.Activate();
+            }
+            else
+            {
+                specialAttack.Activate();
+            }
+        }
+        else
+        {
+            specialAttack.Activate();
+        }
     }
+
+    
 }

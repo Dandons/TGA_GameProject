@@ -10,7 +10,7 @@ public class State
     public GameObject player;
     public Animator anim;
 
-    public enum States { Idle, Patroll, Chase, Attack, block, Stun, Dead, Roll }
+    public enum States { Idle, Patroll, Chase, Attack, Block, Stun, Dead, Roll, InCombat }
     public enum Events { Enter, Update, Exit }
     public States states;
     protected Events events;
@@ -25,6 +25,8 @@ public class State
     public virtual void Exit() { events = Events.Exit; }
     public State Process()
     {
+        Debug.Log(states.ToString());
+        Debug.Log(events.ToString());
         if (events == Events.Enter) Enter();
         if (events == Events.Update) Update();
         if (events == Events.Exit)
@@ -52,7 +54,7 @@ public class Idle : State
         //If player in detection range
         if (enemy.DetectPlayer())
         {
-            nextState = new Chase(enemy, player);
+            nextState = new InCombat(enemy, player);
             events = Events.Exit;
         }
         //10% chance for going patrol
@@ -81,7 +83,7 @@ public class Chase : State
         //Player in atk range
         if ((enemy.transform.position - player.transform.position).magnitude <= enemy.attackRange)
         {
-            nextState = new Attack(enemy,player);
+            nextState = new InCombat(enemy, player);
             events = Events.Exit;
         }
     }
@@ -99,8 +101,109 @@ public class Attack : State
     }
     public override void Enter()
     {
-        states = States.Attack;
         base.Enter();
     }
-    public override void Update(){}
+    public override void Update()
+    {
+        enemy.Attack();
+        nextState = new Stun(enemy, player);
+    }
+    public override void Exit()
+    {
+        base.Exit();
+    }
 }
+
+public class Block : State
+{
+    public Block(Enemy _enemy, GameObject _player) : base(_enemy, _player)
+    {
+        states = States.Block;
+    }
+}
+public class Stun : State
+{
+    public Stun(Enemy _enemy, GameObject _player) : base(_enemy, _player)
+    {
+        states = States.Stun;
+    }
+    public override void Enter()
+    {
+        enemy.SetAnim("stun");
+        base.Enter();
+    }
+    public override void Update()
+    {
+        enemy.StartCoroutine("stun");
+        base.Update();
+    }
+    public override void Exit()
+    {
+        enemy.ResetAnim("stun");
+        base.Exit();
+    }
+    public IEnumerator stun(float Stuntime)
+    {
+        yield return new WaitForSeconds(Stuntime);
+        nextState = new InCombat(enemy, player);
+        events = Events.Exit;
+    }
+}
+public class Dead : State
+{
+    public Dead(Enemy _enemy, GameObject _player) : base(_enemy, _player)
+    {
+        states = States.Dead;
+    }
+    public override void Enter()
+    {
+        enemy.SetAnim("dead");
+        base.Enter();
+    }
+    public override void Exit()
+    {
+    }
+}
+public class InCombat : State
+{
+    public InCombat(Enemy _enemy, GameObject _player) : base(_enemy, _player)
+    {
+        states = States.InCombat;
+    }
+    public override void Enter()
+    {
+        enemy.SetAnim("inCombat");
+        base.Enter();
+    }
+    public override void Update()
+    {
+        if ((enemy.transform.position - player.transform.position).magnitude <= enemy.attackRange)
+        {
+            nextState = new Attack(enemy, player);
+            events = Events.Exit;
+        }
+        else if (!enemy.DetectPlayer())
+        {
+            nextState = new Idle(enemy,player);
+            events = Events.Exit;
+        }
+        else
+        {
+            nextState = new Chase(enemy, player);
+            events = Events.Exit;
+        }
+    }
+    public override void Exit()
+    {
+        enemy.ResetAnim("inCombat");
+        base.Exit();
+    }
+}
+
+
+
+
+
+
+
+

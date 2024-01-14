@@ -9,9 +9,9 @@ public class Character : MonoBehaviour
     public float def;
     public float atkSpeed;
     public float moveSpeed;
-    protected Rigidbody rb;
-    protected Animator anim;
-    protected AudioSource audioSource;
+    public Rigidbody rb;
+    public Animator anim;
+    public AudioSource audioSource;
 
     private void Awake()
     {
