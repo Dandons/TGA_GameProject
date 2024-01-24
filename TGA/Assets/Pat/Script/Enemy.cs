@@ -91,4 +91,9 @@ public class Enemy : Character
     }
 
     
+
+    public override void Block()
+    {
+        base.Block();
+    }
 }
