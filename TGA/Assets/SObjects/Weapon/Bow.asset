@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7324bdd0317394fd9905a76ebf838471, type: 3}
   m_Name: Bow
   m_EditorClassIdentifier: 
-  weaponType: 0
+  weaponType: 1
+  attackType: 0
   lightAttack: {fileID: 0}
   heavyAttack: {fileID: 0}
   block: {fileID: 0}

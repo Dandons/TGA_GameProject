@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Weapon : Singleton<Weapon>
+public class WeaponManager : Singleton<WeaponManager>
 {
     public WeaponProfile sword;
     public WeaponProfile bow;

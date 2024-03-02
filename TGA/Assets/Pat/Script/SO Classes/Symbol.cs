@@ -17,9 +17,12 @@ public class Symbol : ScriptableObject
     [SerializeField] float dmgAmplifier;
     [SerializeField] float atk;
     [SerializeField] float def;
+    [SerializeField] float hp;
     [SerializeField] float sta;
+    [SerializeField] float heatResist;
+    [SerializeField] float coldResist;
     [HideInInspector] int level = 0;
-    private int maxLevel;
+    [SerializeField] int maxLevel;
     public Sprite sprite;
     public Skill uniqueSkill;
     public void ActiveUnique(){}
