@@ -2,12 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class InventorySlot : MonoBehaviour
 {
     [SerializeField] TMP_Text stackCount;
-    [SerializeField] Sprite sprite;
-    [HideInInspector] public string itemID;
+    [SerializeField] Image image;
+    [HideInInspector] public string itemID = "000";
     [HideInInspector] public Item item;
     [HideInInspector] public int stack = 0;
     [HideInInspector] public int maxStack = 1;
@@ -17,9 +18,11 @@ public class InventorySlot : MonoBehaviour
     }
     public void SetSlot(Item _item)
     {
+        this.image.enabled = true;
         item = _item;
-        sprite = _item.sprite;
+        image.sprite = _item.sprite;
         itemID = _item.id;
+        stack = 1;
         maxStack = _item.maxStack;
     }
     public bool AddItem()
@@ -30,7 +33,7 @@ public class InventorySlot : MonoBehaviour
             stackCount.text = stack.ToString();
             return true;
         }
-        else{return false;}
+        else { return false; }
     }
     public bool RemoveItem()
     {
@@ -47,24 +50,26 @@ public class InventorySlot : MonoBehaviour
             }
             return true;
         }
-        else{return false;}
+        else { return false; }
     }
     public bool UseItem()
     {
-        if(itemID[0]!='K'){  
+        if (itemID[0] != 'K')
+        {
             item.UseItem();
             RemoveItem();
             return true;
         }
-        else{return false;}
+        else { return false; }
     }
     public void ClearSlot()
     {
-        sprite = null;
+        image.sprite = null;
         item = null;
         itemID = null;
         stack = 0;
         maxStack = 1;
         stackCount.text = "";
+        image.enabled = false;
     }
 }

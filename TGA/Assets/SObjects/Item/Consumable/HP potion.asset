@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9271727527bd4431ab64fb9d7389d2ff, type: 3}
   m_Name: HP potion
   m_EditorClassIdentifier: 
-  skill: {fileID: 0}
+  skill: {fileID: 11400000, guid: dfd41e6f1868d455c9ee92e71c956bb0, type: 2}
   stackable: 1
   maxStack: 5
   cooldown: 2
   id: C001
-  sprite: {fileID: 0}
+  sprite: {fileID: 3391099708441930465, guid: 84f5d586479e99a4d8e3dd4822848edf, type: 3}

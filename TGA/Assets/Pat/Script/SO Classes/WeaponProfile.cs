@@ -22,4 +22,5 @@ public class WeaponProfile : ScriptableObject
     public Skill heavyAttack;
     public Skill block;
     public Skill[] skill = new Skill[4];
+    public Sprite weaponSprite;
 }
