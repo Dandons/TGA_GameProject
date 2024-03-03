@@ -13,6 +13,5 @@ public class InventoryManager : Singleton<InventoryManager>
                 return;
             }
         }
-        NotificationManager.Instance.middleNoti("You can do that!",2);
     }
 }

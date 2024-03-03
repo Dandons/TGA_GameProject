@@ -11,7 +11,7 @@ public class Skill : ScriptableObject
         self
     }
     public TargetType targetType;
-    public float actionSoeed;
+    public float actionSpeed;
     public float staUsage;
     public float baseDmg;
     public float dmgAmplifier;
@@ -19,7 +19,7 @@ public class Skill : ScriptableObject
     public float buffDuration;
     public float coolDown;
     [HideInInspector]
-    public bool avaible
+    public bool available
     {
         get
         {

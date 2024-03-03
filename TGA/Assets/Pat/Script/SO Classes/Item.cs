@@ -7,10 +7,10 @@ public class Item : ScriptableObject
 {
     [SerializeField] Skill skill;
     [SerializeField] bool stackable;
-    public int maxStack{get;}
-    public float cooldown{get;}
-    public string id{get;}
-    public Sprite sprite{get;}
+    public int maxStack;
+    public float cooldown;
+    public string id;
+    public Sprite sprite;
     public void UseItem(){
         skill.Activate();
     }

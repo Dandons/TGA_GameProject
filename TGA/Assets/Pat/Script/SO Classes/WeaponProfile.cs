@@ -13,7 +13,8 @@ public class WeaponProfile : ScriptableObject
         Bow,
         Sword,
         Polearm,
-        Dagger
+        Dagger,
+        NoWeapon
     }
     public WeaponType weaponType;
     public AttackType attackType;

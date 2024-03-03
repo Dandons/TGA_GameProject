@@ -56,11 +56,11 @@ public class Enemy : Character
         int skillChance = Random.Range(0, 101);
         if (skillChance <= 60)
         {
-            if (lightAttack.avaible)
+            if (lightAttack.available)
             {
                 lightAttack.Activate();
             }
-            else if (heavyAttack.avaible)
+            else if (heavyAttack.available)
             {
                 heavyAttack.Activate();
             }
@@ -71,11 +71,11 @@ public class Enemy : Character
         }
         else if (skillChance <= 90)
         {
-            if (heavyAttack.avaible)
+            if (heavyAttack.available)
             {
                 heavyAttack.Activate();
             }
-            else if (lightAttack.avaible)
+            else if (lightAttack.available)
             {
                 lightAttack.Activate();
             }
