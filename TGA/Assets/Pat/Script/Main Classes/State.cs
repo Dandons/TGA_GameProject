@@ -89,6 +89,7 @@ public class Chase : State
     }
     public override void Exit()
     {
+        enemy.agent.SetDestination(enemy.transform.position);
         enemy.ResetAnim("chase");
         base.Exit();
     }
@@ -144,7 +145,7 @@ public class Stun : State
     }
     public IEnumerator stun(float Stuntime)
     {
-        yield return new WaitForSeconds(Stuntime);
+        yield return new WaitForSeconds(1);
         nextState = new InCombat(enemy, player);
         events = Events.Exit;
     }
